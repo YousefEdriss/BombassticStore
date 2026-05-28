@@ -308,19 +308,133 @@
     @keyframes g1{0%,88%,100%{transform:translate(0);opacity:0}89%{transform:translate(-3px,1px);opacity:.8}91%{transform:translate(3px,-1px);opacity:.8}93%{transform:translate(-1px,2px);opacity:.8}95%{transform:translate(0);opacity:0}}
     @keyframes g2{0%,84%,100%{transform:translate(0);opacity:0}85%{transform:translate(3px,-1px);opacity:.8}87%{transform:translate(-3px,1px);opacity:.8}89%{transform:translate(1px,2px);opacity:.8}91%{transform:translate(0);opacity:0}}
 
-    /* ─── RESPONSIVE ──────────────────────────── */
-    @media(max-width:900px){
-      nav,.hero-content,#products,#features,.sp-content,#stats,.stats-grid,.testi-grid,.foot-grid,#testimonials,#newsletter,footer{padding-left:24px;padding-right:24px}
-      .prod-grid,.feat-grid,.stats-grid,.testi-grid{grid-template-columns:1fr 1fr}
-      #collections,.coll-hdr,.foot-grid{grid-template-columns:1fr}
-      #spotlight{grid-template-columns:1fr}
-      .nav-links{display:none}
-      .hero-img{height:50vh;right:-5%}
-      .h-title{font-size:clamp(44px,12vw,80px)}
+    /* ─── HAMBURGER ───────────────────────────── */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;z-index:810}
+    .hamburger span{display:block;width:26px;height:2px;background:#fff;transition:all .3s ease}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    .mobile-menu{
+      display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:805;
+      flex-direction:column;align-items:center;justify-content:center;gap:36px;
+      opacity:0;transition:opacity .35s ease
     }
-    @media(max-width:520px){
-      .prod-grid,.feat-grid,.stats-grid,.testi-grid{grid-template-columns:1fr}
+    .mobile-menu.open{display:flex}
+    .mobile-menu.visible{opacity:1}
+    .mobile-menu a{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;letter-spacing:4px;color:var(--gray);text-decoration:none;text-transform:uppercase;transition:color .3s}
+    .mobile-menu a:hover{color:var(--orange)}
+    .mobile-menu .nav-btn{padding:14px 40px;font-size:13px}
+
+    /* ─── RESPONSIVE ──────────────────────────── */
+
+    /* Tablet: 768–1024px */
+    @media(max-width:1024px){
+      nav{padding:18px 32px}
+      nav.stuck{padding:12px 32px}
+      .hero-content{padding:0 32px;max-width:60%}
+      .hero-img{height:70vh;right:0}
+      #products,#features,#testimonials,#newsletter{padding-left:32px;padding-right:32px}
+      .coll-hdr{padding:80px 32px 32px}
+      #collections{padding:0 32px 80px}
+      .sp-content{padding:60px 40px}
+      #stats{padding:60px 32px}
+      footer{padding:60px 32px 32px}
+      .foot-grid{gap:40px}
+      .prod-grid{grid-template-columns:repeat(2,1fr)}
+      .feat-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+    }
+
+    /* Mobile: ≤768px */
+    @media(max-width:768px){
+      /* Nav */
+      nav{padding:16px 20px}
+      nav.stuck{padding:12px 20px}
+      .nav-links{display:none}
+      .nav-btn{display:none}
+      .hamburger{display:flex}
+
+      /* Hero */
+      #hero{align-items:flex-end;padding-bottom:80px}
+      .hero-content{padding:0 20px;max-width:100%;padding-top:100px}
+      .h-title{font-size:clamp(42px,13vw,72px)}
+      .h-eyebrow{font-size:10px}
+      .h-sub{font-size:15px;max-width:100%}
+      .h-cta{flex-direction:column;gap:12px}
+      .h-cta .btn-p,.h-cta .btn-s{width:100%;text-align:center;padding:15px 20px}
       .hero-img{display:none}
+      .hero-stats{
+        position:relative;bottom:auto;right:auto;
+        display:flex;justify-content:space-around;
+        padding:20px;margin-top:28px;
+        background:rgba(255,255,255,.04);border-top:1px solid rgba(255,85,0,.2)
+      }
+      .stat-n{font-size:20px}
+      .stat-l{font-size:9px}
+
+      /* Products */
+      #products{padding:60px 20px}
+      .sec-hdr{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:36px}
+      .prod-grid{grid-template-columns:1fr 1fr;gap:14px}
+      .p-img{height:200px}
+      .p-name{font-size:17px}
+      .p-price{font-size:18px}
+      .atc{padding:8px 12px;font-size:9px}
+
+      /* Video */
+      #video-sec{height:60vh}
+      .v-content .sec-title{font-size:clamp(32px,9vw,56px)}
+      .play-btn{width:68px;height:68px;font-size:22px}
+
+      /* Collections */
+      .coll-hdr{padding:60px 20px 28px}
+      #collections{padding:0 20px 60px;grid-template-columns:1fr}
+      .coll-card{height:320px}
+      .coll-name{font-size:26px}
+
+      /* Features */
+      #features{padding:60px 20px}
+      .feat-grid{grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+      .feat-card{padding:28px 16px}
+      .feat-icon{width:52px;height:52px;font-size:22px}
+
+      /* Spotlight */
+      #spotlight{grid-template-columns:1fr}
+      .sp-visual{height:300px}
+      .sp-content{padding:40px 20px}
+      .spec-k,.spec-v{font-size:12px}
+
+      /* Stats */
+      #stats{padding:48px 20px}
+      .stats-grid{grid-template-columns:repeat(2,1fr);gap:28px}
+      .stat-big{font-size:38px}
+      .stat-lbl{font-size:10px}
+
+      /* Testimonials */
+      #testimonials{padding:60px 20px}
+      .testi-grid{grid-template-columns:1fr;gap:16px;margin-top:40px}
+
+      /* Newsletter */
+      #newsletter{padding:60px 20px}
+      .nl-form{flex-direction:column}
+      .nl-input{border-right:1px solid rgba(255,255,255,.14);border-bottom:none}
+      .nl-btn{padding:14px}
+
+      /* Footer */
+      footer{padding:48px 20px 28px}
+      .foot-grid{grid-template-columns:1fr 1fr;gap:32px;margin-bottom:40px}
+      .foot-btm{flex-direction:column;gap:8px;text-align:center}
+    }
+
+    /* Small mobile: ≤480px */
+    @media(max-width:480px){
+      .prod-grid{grid-template-columns:1fr}
+      .feat-grid{grid-template-columns:1fr}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+      .foot-grid{grid-template-columns:1fr}
+      .h-title{font-size:clamp(38px,15vw,64px)}
+      .p-img{height:240px}
+      .sec-title{font-size:clamp(26px,8vw,44px)}
     }
   </style>
 </head>
@@ -349,7 +463,19 @@
     <li><a href="#testimonials">Reviews</a></li>
   </ul>
   <button class="nav-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products"  class="mob-link">Products</a>
+  <a href="#collections" class="mob-link">Collections</a>
+  <a href="#features"  class="mob-link">Tech</a>
+  <a href="#testimonials" class="mob-link">Reviews</a>
+  <button class="nav-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'});closeMobileMenu()">Shop Now</button>
+</div>
 
 <!-- ══════════════════════ HERO ══════════════════════ -->
 <section id="hero">
@@ -899,6 +1025,34 @@ document.getElementById('nlBtn').addEventListener('click', () => {
     inp.focus();
     setTimeout(() => inp.style.borderColor = '', 1500);
   }
+});
+
+/* ─── HAMBURGER MENU ─────────────────────────────────── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function closeMobileMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('visible');
+  setTimeout(() => mobileMenu.classList.remove('open'), 350);
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  const isOpen = hamburger.classList.toggle('open');
+  if (isOpen) {
+    mobileMenu.classList.add('open');
+    setTimeout(() => mobileMenu.classList.add('visible'), 10);
+    document.body.style.overflow = 'hidden';
+  } else {
+    closeMobileMenu();
+  }
+});
+
+document.querySelectorAll('.mob-link').forEach(a => {
+  a.addEventListener('click', () => {
+    closeMobileMenu();
+  });
 });
 
 /* ─── SMOOTH ANCHOR SCROLL ───────────────────────────── */
